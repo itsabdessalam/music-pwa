@@ -1,4 +1,4 @@
-const APP_GLOBAL_VAR = "";
+const APP_GLOBAL_VAR = "__music_app_user";
 
 /**
  *
@@ -25,9 +25,9 @@ const setUser = (user) => {
  * @param {*} { username, password, token }
  * @returns
  */
-export const handleLogin = ({ username, password, token }) => {
+export const handleLogin = ({ email, password, token }) => {
   return setUser({
-    username,
+    email,
     token,
   });
 };

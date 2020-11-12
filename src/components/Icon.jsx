@@ -38,6 +38,7 @@ const Icon = ({ children, name, ...props }) => {
         strokeminecap="round"
         strokeLinejoin="round"
         xmlns="http://www.w3.org/2000/svg"
+        className={name}
         {...props}
         dangerouslySetInnerHTML={{
           __html: icons.find((icon) => icon.name === name)

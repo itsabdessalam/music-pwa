@@ -8,6 +8,7 @@ import Tracks from "../pages/tracks";
 import Track from "../pages/track";
 import Search from "../pages/search";
 import Profile from "../pages/profile";
+import Favorites from "../pages/favorites";
 
 const Layout = ({ children, ...props }) => {
   const location = useLocation();
@@ -42,6 +43,9 @@ const Layout = ({ children, ...props }) => {
           </ProtectedRoute>
           <ProtectedRoute exact path="/profile">
             <Profile />
+          </ProtectedRoute>
+          <ProtectedRoute exact path="/favorites">
+            <Favorites />
           </ProtectedRoute>
         </Switch>
       </Container>

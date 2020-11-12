@@ -38,7 +38,7 @@ const TabItem = ({ children, to, text, icon, ...props }) => {
     <StyledTabItem className="tab">
       <Link className="tab__link" to={to}>
         <span className="tab__text">{text}</span>
-        <Icon name={icon} className="tab__icon" width="16px"></Icon>
+        <Icon name={icon} className="tab__icon" width="18px"></Icon>
       </Link>
     </StyledTabItem>
   );

@@ -11,10 +11,13 @@ const StyledTabs = styled.footer`
   background: #ffffff;
   align-items: center;
   justify-content: space-between;
+  max-width: ${({ theme }) => theme.screens.md};
+  margin: 0 auto;
+  z-index: 1070;
 `;
 
 const Tabs = ({ children, ...props }) => {
-  return <StyledTabs>{children}</StyledTabs>;
+  return <StyledTabs {...props}>{children}</StyledTabs>;
 };
 
 export default Tabs;

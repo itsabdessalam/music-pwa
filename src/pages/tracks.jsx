@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Title, TrackItem } from "../components";
+import { Title, TrackItem, Loader } from "../components";
 import { getTracks } from "../services/SpotifyService";
 
 const Tracks = () => {
@@ -14,15 +14,16 @@ const Tracks = () => {
 
       try {
         const result = await getTracks();
-        const { data } = result;
-        const { items } = data;
+        const {
+          data: { items },
+        } = result;
 
         setTracks(items);
       } catch (error) {
         setIsError(true);
+      } finally {
+        setIsLoading(false);
       }
-
-      setIsLoading(false);
     }
     fetchData();
   }, []);
@@ -33,10 +34,14 @@ const Tracks = () => {
 
       {isError && <p>An error occured...</p>}
 
-      {isLoading ? (
-        <p>Loading...</p>
+      {!isLoading ? (
+        <div className="track__list">
+          {tracks.map((track, index) => (
+            <TrackItem key={index} data={track} />
+          ))}
+        </div>
       ) : (
-        tracks.map((track, index) => <TrackItem key={index} data={track} />)
+        <Loader />
       )}
     </>
   );

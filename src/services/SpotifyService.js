@@ -31,7 +31,7 @@ module.exports = {
 
     return axios({
       method: "get",
-      url: `${SPOTIFY_API_URL}/playlists/4734kkip4gyyGiXnGJR9wv/tracks`,
+      url: `${SPOTIFY_API_URL}/playlists/37i9dQZEVXbIPWwFssbupI/tracks`, // Top 50 France playlist
       headers: {
         Accept: "application/json",
         Authorization: `${token_type} ${access_token}`,
@@ -42,9 +42,16 @@ module.exports = {
     const { data } = await getToken();
     const { access_token, token_type } = data;
 
-    return axios.get(`${SPOTIFY_API_URL}/tracks/${id}`);
+    return axios({
+      method: "get",
+      url: `${SPOTIFY_API_URL}/tracks/${id}`,
+      headers: {
+        Accept: "application/json",
+        Authorization: `${token_type} ${access_token}`,
+      },
+    });
   },
-  async searchTracks(query) {
+  async searchTracks(query, limit = 50, offset = 0) {
     const { data } = await getToken();
     const { access_token, token_type } = data;
 
@@ -54,6 +61,8 @@ module.exports = {
       params: {
         q: query,
         type: "track",
+        limit,
+        offset,
       },
       headers: {
         Accept: "application/json",

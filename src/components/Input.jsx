@@ -9,7 +9,8 @@ const StyledInput = styled.input`
   display: block;
   margin: 0;
   padding: 10px 16px;
-  border: 2px solid rgb(139 156 172 / 40%);
+  border: none;
+  box-shadow: 0px 10px 50px rgb(220 226 229 / 0.2);
   border-radius: 8px;
   color: ${({ theme }) => theme.colors.gray.dark};
   background-color: #ffffff;
@@ -18,6 +19,10 @@ const StyledInput = styled.input`
 
   &:not(:last-child) {
     margin-bottom: 12px;
+  }
+
+  ::placeholder {
+    color: ${({ theme }) => theme.colors.gray.light};
   }
 `;
 

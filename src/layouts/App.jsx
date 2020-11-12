@@ -9,13 +9,18 @@ const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
   }
 
+  html,
+  body {
+    max-width: ${theme.screens.md};
+    margin: 0 auto;
+  }
+
   body {
     margin: 0;
     font-family: Inter UI,system-ui,-apple-system,BlinkMacSystemFont,
     Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji;
     background-color: ${theme.colors.background.light};
-    overflow-x: hidden;
-    color: ${theme.colors.gray.dark};
+    color: ${theme.colors.gray.dark};  
   }
 
   a, button {
@@ -28,7 +33,7 @@ const GlobalStyle = createGlobalStyle`
 
 const App = () => (
   <>
-    <ThemeProvider theme={{ colors: theme.colors }}>
+    <ThemeProvider theme={theme}>
       <GlobalStyle />
       <BrowserRouter>
         <Layout />

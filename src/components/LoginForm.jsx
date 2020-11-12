@@ -13,13 +13,13 @@ import Button from "./Button";
 const LoginForm = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [redirect, setRedirect] = useState(true);
 
   const auth = async () => {
     setIsLoading(true);
+    setError(null);
 
     const user = {
-      username: values.username,
+      email: values.email,
       password: values.password,
     };
 
@@ -27,26 +27,29 @@ const LoginForm = () => {
 
     if (err) {
       setError({ message: err.message });
-      setRedirect(false);
+      setIsLoading(false);
     }
-
-    setIsLoading(false);
 
     if (result && result.data.errors) {
       setError({ message: "Invalid credentials provided" });
-      setRedirect(false);
+      setIsLoading(false);
     }
 
-    if (redirect && result.headers["x-access-token"]) {
+    const { data = {} } = result || {};
+
+    console.log("toto", data, data.auth && data.token);
+
+    if (data && data.auth && data.token) {
       handleLogin({
         ...user,
-        token: result.headers["x-access-token"],
+        token: data.token,
       });
+      setIsLoading(false);
     }
   };
 
   const { values, handleChange, handleSubmit } = useForm(auth, {
-    username: "",
+    email: "",
     password: "",
   });
 
@@ -57,14 +60,13 @@ const LoginForm = () => {
   return (
     <>
       <Form className="inner-form" onSubmit={handleSubmit}>
-        {error ? <p className="error">{error.message}</p> : null}
         <Input
-          name="username"
+          name="email"
           type="text"
-          placeholder={"johndoe"}
-          label={"Username"}
+          placeholder={"john.doe@email.com"}
+          label={"Email"}
           onChange={handleChange}
-          value={values.username}
+          value={values.email}
           required
         />
         <Input
@@ -76,10 +78,8 @@ const LoginForm = () => {
           value={values.password}
           required
         />
-
-        <Button type="submit" disabled={isLoading} icon={"loader"}>
-          Login
-        </Button>
+        {error ? <p className="error">{error.message}</p> : null}
+        <Button type="submit">{isLoading ? "Loading" : "Login"}</Button>
       </Form>
     </>
   );
