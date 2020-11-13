@@ -32,25 +32,6 @@ const StyledTrackItem = styled.div`
         border-top-left-radius: 8px;
         border-bottom-left-radius: 8px;
       }
-
-      &:after {
-        content: "";
-        position: absolute;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        left: 0;
-        display: block;
-        background-image: linear-gradient(
-          0,
-          #030e2d,
-          transparent 50%,
-          transparent
-        );
-        border-top-left-radius: 8px;
-        border-bottom-left-radius: 8px;
-        z-index: 1000;
-      }
     }
 
     .track__meta {
@@ -172,7 +153,21 @@ const StyledTrackItem = styled.div`
         }
 
         &:after {
+          content: "";
+          position: absolute;
+          top: 0;
+          right: 0;
+          bottom: 0;
+          left: 0;
+          display: block;
+          background-image: linear-gradient(
+            0,
+            #030e2d,
+            transparent 50%,
+            transparent
+          );
           border-radius: 8px;
+          z-index: 1000;
         }
       }
 

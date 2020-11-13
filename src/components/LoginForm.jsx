@@ -37,8 +37,6 @@ const LoginForm = () => {
 
     const { data = {} } = result || {};
 
-    console.log("toto", data, data.auth && data.token);
-
     if (data && data.auth && data.token) {
       handleLogin({
         ...user,

@@ -13,8 +13,8 @@ const AppContextProvider = ({ children }) => {
     "__music_app_user_favorites",
     []
   );
-
   const [isFetchingMore, setIsFetchingMore] = useState(false);
+  const [isOffline, setIsOffline] = useState(false);
 
   const handleTrackFavorite = (track) => {
     let trackExists = favorites.find((favorite) => favorite.id === track.id);
@@ -40,6 +40,8 @@ const AppContextProvider = ({ children }) => {
     inFavorites,
     isFetchingMore,
     setIsFetchingMore,
+    isOffline,
+    setIsOffline,
   };
 
   return <AppContext.Provider value={context}>{children}</AppContext.Provider>;

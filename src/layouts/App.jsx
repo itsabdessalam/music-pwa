@@ -1,5 +1,7 @@
-import { ThemeProvider, createGlobalStyle } from "styled-components";
+import { useEffect, useContext } from "react";
 import { BrowserRouter } from "react-router-dom";
+import { ThemeProvider, createGlobalStyle } from "styled-components";
+import { AppContext } from "../context";
 import Layout from "./Layout";
 import theme from "../config/theme";
 
@@ -31,15 +33,34 @@ const GlobalStyle = createGlobalStyle`
   }
 `;
 
-const App = () => (
-  <>
-    <ThemeProvider theme={theme}>
-      <GlobalStyle />
-      <BrowserRouter>
-        <Layout />
-      </BrowserRouter>
-    </ThemeProvider>
-  </>
-);
+const App = () => {
+  const { setIsOffline } = useContext(AppContext);
+
+  useEffect(() => {
+    window.addEventListener("load", () => {
+      if (!navigator.onLine) {
+        setIsOffline(true);
+      }
+    });
+    window.addEventListener("offline", () => {
+      setIsOffline(true);
+    });
+    window.addEventListener("online", () => {
+      setIsOffline(false);
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  return (
+    <>
+      <ThemeProvider theme={theme}>
+        <GlobalStyle />
+        <BrowserRouter>
+          <Layout />
+        </BrowserRouter>
+      </ThemeProvider>
+    </>
+  );
+};
 
 export default App;

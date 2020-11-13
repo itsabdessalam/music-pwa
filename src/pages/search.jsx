@@ -10,7 +10,9 @@ const Search = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [tracks, setTracks] = useState([]);
   const [offset, setOffset] = useState(0);
-  const { isFetchingMore, setIsFetchingMore } = useContext(AppContext);
+  const { isFetchingMore, setIsFetchingMore, isOffline } = useContext(
+    AppContext
+  );
   const debouncedSearchQuery = useDebounce(searchQuery, 500);
 
   const domRef = createRef();
@@ -18,6 +20,10 @@ const Search = () => {
   // TODO: refactor
   useEffect(() => {
     async function fetchData() {
+      if (isOffline) {
+        return;
+      }
+
       if (debouncedSearchQuery) {
         setIsLoading(true);
 
@@ -44,10 +50,10 @@ const Search = () => {
       }
     }
     fetchData();
-  }, [debouncedSearchQuery]);
+  }, [debouncedSearchQuery, isOffline]);
 
   useEffect(() => {
-    if (!debouncedSearchQuery) {
+    if (!debouncedSearchQuery || isOffline) {
       return;
     }
 
@@ -106,11 +112,12 @@ const Search = () => {
       }
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [debouncedSearchQuery, isFetchingMore, isLoading]);
+  }, [debouncedSearchQuery, isFetchingMore, isLoading, isOffline]);
 
   return (
     <div ref={domRef}>
       <Title level={2}>Search</Title>
+
       <Input
         name="search"
         type="text"
@@ -133,19 +140,19 @@ const Search = () => {
             position: "fixed",
             bottom: "50px",
             display: "flex",
-            height: "48px",
+            height: "60px",
             alignItems: "center",
             justifyContent: "center",
             width: "100%",
             left: 0,
-            backgroundColor: "#ffffff",
+            backgroundImage:
+              "linear-gradient(0deg, rgb(247, 250, 252) 0%, rgba(247, 250, 252, 0.8) 50%, rgba(247, 250, 252, 0) 100%)",
             zIndex: 1070,
           }}
         >
           <Loader />
         </div>
       )}
-
       <div id="sentinel"></div>
     </div>
   );

@@ -1,5 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
+import { AppContext } from "../context";
 import { Title, TrackItem, Loader } from "../components";
 
 import SpotifyService from "../services/SpotifyService";
@@ -9,9 +10,13 @@ const Track = () => {
   const [track, setTrack] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
+  const { isOffline } = useContext(AppContext);
 
   useEffect(() => {
     async function fetchData() {
+      if (isOffline) {
+        return;
+      }
       setIsError(false);
       setIsLoading(true);
 
@@ -30,7 +35,7 @@ const Track = () => {
       }
     }
     fetchData();
-  }, [id]);
+  }, [id, isOffline]);
 
   return (
     <>
