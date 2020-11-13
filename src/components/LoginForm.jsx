@@ -3,8 +3,8 @@ import { Redirect } from "react-router-dom";
 import { useForm } from "../hooks";
 import until from "../utils/until";
 
-import { login } from "../services/AuthService";
 import { handleLogin, isLoggedIn } from "../utils/auth";
+import AuthService from "../services/AuthService";
 
 import Form from "./Form";
 import Input from "./Input";
@@ -23,7 +23,7 @@ const LoginForm = () => {
       password: values.password,
     };
 
-    const [err, result] = await until(login(user));
+    const [err, result] = await until(AuthService.login(user));
 
     if (err) {
       setError({ message: err.message });

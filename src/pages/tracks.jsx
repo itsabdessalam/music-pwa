@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Title, TrackItem, Loader } from "../components";
-import { getTracks } from "../services/SpotifyService";
+
+import SpotifyService from "../services/SpotifyService";
 
 const Tracks = () => {
   const [tracks, setTracks] = useState([]);
@@ -13,7 +14,7 @@ const Tracks = () => {
       setIsLoading(true);
 
       try {
-        const result = await getTracks();
+        const result = await SpotifyService.getTracks();
         const {
           data: { items },
         } = result;

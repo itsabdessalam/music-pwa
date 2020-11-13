@@ -21,7 +21,7 @@ const getToken = () => {
   });
 };
 
-module.exports = {
+const SpotifyService = {
   getToken() {
     return axios.get();
   },
@@ -71,3 +71,5 @@ module.exports = {
     });
   },
 };
+
+export default SpotifyService;

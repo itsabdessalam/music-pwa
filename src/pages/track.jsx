@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { getTrackById } from "../services/SpotifyService";
 import { Title, TrackItem, Loader } from "../components";
+
+import SpotifyService from "../services/SpotifyService";
 
 const Track = () => {
   const { id } = useParams();
@@ -15,7 +16,7 @@ const Track = () => {
       setIsLoading(true);
 
       try {
-        const result = await getTrackById(id);
+        const result = await SpotifyService.getTrackById(id);
         const { data } = result;
 
         setTrack({

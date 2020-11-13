@@ -2,7 +2,8 @@ import { useState, useEffect, useContext, createRef } from "react";
 import { AppContext } from "../context";
 import { useDebounce } from "../hooks";
 import { Title, Input, TrackItem, Loader } from "../components";
-import { searchTracks } from "../services/SpotifyService";
+
+import SpotifyService from "../services/SpotifyService";
 
 const Search = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -21,7 +22,9 @@ const Search = () => {
         setIsLoading(true);
 
         try {
-          const result = await searchTracks(debouncedSearchQuery);
+          const result = await SpotifyService.searchTracks(
+            debouncedSearchQuery
+          );
           const {
             data: {
               tracks: { items },
@@ -71,7 +74,11 @@ const Search = () => {
       setOffset(newOffset);
 
       try {
-        const result = await searchTracks(debouncedSearchQuery, 50, newOffset);
+        const result = await SpotifyService.searchTracks(
+          debouncedSearchQuery,
+          50,
+          newOffset
+        );
         const {
           data: {
             tracks: { items },
