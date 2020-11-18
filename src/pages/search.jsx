@@ -47,7 +47,11 @@ const Search = () => {
   }
 
   useEffect(() => {
-    if (!debouncedSearchQuery || isOffline) {
+    if (isOffline) {
+      return;
+    }
+
+    if (!debouncedSearchQuery) {
       setTracks([]);
       return;
     }
@@ -68,7 +72,11 @@ const Search = () => {
   }, [debouncedSearchQuery]);
 
   useEffect(() => {
-    if (!debouncedSearchQuery || isOffline) {
+    if (isOffline) {
+      return;
+    }
+
+    if (!debouncedSearchQuery) {
       setTracks([]);
       return;
     }
