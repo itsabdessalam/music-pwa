@@ -8,8 +8,8 @@ const StyledContainer = styled.main`
 
   &.full {
     display: flex;
-    align-items: center;
     justify-content: center;
+    flex-direction: column;
     height: 100vh;
     padding-bottom: 15px;
   }

@@ -63,7 +63,26 @@ const StyledTrackItem = styled.div`
           right: 0;
           width: 70px;
           height: 18px;
-          background: linear-gradient(to right, rgba(0, 0, 0, 0), #ffffff 50%);
+          background: rgb(255, 255, 255);
+          background: -moz-linear-gradient(
+            90deg,
+            rgba(255, 255, 255, 0) 0%,
+            rgba(255, 255, 255, 1) 50%,
+            rgba(255, 255, 255, 1) 100%
+          );
+          background: -webkit-linear-gradient(
+            90deg,
+            rgba(255, 255, 255, 0) 0%,
+            rgba(255, 255, 255, 1) 50%,
+            rgba(255, 255, 255, 1) 100%
+          );
+          background: linear-gradient(
+            90deg,
+            rgba(255, 255, 255, 0) 0%,
+            rgba(255, 255, 255, 1) 50%,
+            rgba(255, 255, 255, 1) 100%
+          );
+          filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#ffffff",endColorstr="#ffffff",GradientType=1);
         }
       }
 
@@ -85,7 +104,26 @@ const StyledTrackItem = styled.div`
           right: 0;
           width: 70px;
           height: 18px;
-          background: linear-gradient(to right, rgba(0, 0, 0, 0), #ffffff 50%);
+          background: rgb(255, 255, 255);
+          background: -moz-linear-gradient(
+            90deg,
+            rgba(255, 255, 255, 0) 0%,
+            rgba(255, 255, 255, 1) 50%,
+            rgba(255, 255, 255, 1) 100%
+          );
+          background: -webkit-linear-gradient(
+            90deg,
+            rgba(255, 255, 255, 0) 0%,
+            rgba(255, 255, 255, 1) 50%,
+            rgba(255, 255, 255, 1) 100%
+          );
+          background: linear-gradient(
+            90deg,
+            rgba(255, 255, 255, 0) 0%,
+            rgba(255, 255, 255, 1) 50%,
+            rgba(255, 255, 255, 1) 100%
+          );
+          filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#ffffff",endColorstr="#ffffff",GradientType=1);
         }
       }
     }
@@ -215,11 +253,27 @@ const StyledTrackItem = styled.div`
       .track__name,
       .track__artists {
         &:after {
-          background: linear-gradient(
-            to right,
-            rgba(0, 0, 0, 0),
-            #f7fafc 50%
+          background: rgb(247, 250, 252);
+          background: -moz-linear-gradient(
+            90deg,
+            rgba(247, 250, 252, 0) 0%,
+            rgba(247, 250, 252, 1) 50%,
+            rgba(247, 250, 252, 1) 100%
           ) !important;
+          background: -webkit-linear-gradient(
+            90deg,
+            rgba(247, 250, 252, 0) 0%,
+            rgba(247, 250, 252, 1) 50%,
+            rgba(247, 250, 252, 1) 100%
+          ) !important;
+          background: linear-gradient(
+            90deg,
+            rgba(247, 250, 252, 0) 0%,
+            rgba(247, 250, 252, 1) 50%,
+            rgba(247, 250, 252, 1) 100%
+          ) !important;
+          filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#f7fafc",endColorstr="#f7fafc",GradientType=1) !important;
+
           width: 90px !important;
           height: 20px !important;
         }

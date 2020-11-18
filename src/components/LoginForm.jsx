@@ -9,6 +9,7 @@ import AuthService from "../services/AuthService";
 import Form from "./Form";
 import Input from "./Input";
 import Button from "./Button";
+import Title from "./Title";
 
 const LoginForm = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -57,6 +58,7 @@ const LoginForm = () => {
 
   return (
     <>
+      <Title level={2}>Login</Title>
       <Form className="inner-form" onSubmit={handleSubmit}>
         <Input
           name="email"
@@ -77,7 +79,9 @@ const LoginForm = () => {
           required
         />
         {error ? <p className="error">{error.message}</p> : null}
-        <Button type="submit">{isLoading ? "Loading" : "Login"}</Button>
+        <Button type="submit" disabled={isLoading}>
+          {isLoading ? "Loading" : "Login"}
+        </Button>
       </Form>
     </>
   );
