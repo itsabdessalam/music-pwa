@@ -37,17 +37,25 @@ const App = () => {
   const { setIsOffline } = useContext(AppContext);
 
   useEffect(() => {
-    window.addEventListener("load", () => {
-      if (!navigator.onLine) {
+    let isMounted = true;
+
+    if (isMounted) {
+      window.addEventListener("load", () => {
+        if (!navigator.onLine) {
+          setIsOffline(true);
+        }
+      });
+      window.addEventListener("offline", () => {
         setIsOffline(true);
-      }
-    });
-    window.addEventListener("offline", () => {
-      setIsOffline(true);
-    });
-    window.addEventListener("online", () => {
-      setIsOffline(false);
-    });
+      });
+      window.addEventListener("online", () => {
+        setIsOffline(false);
+      });
+    }
+
+    return () => {
+      isMounted = false;
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

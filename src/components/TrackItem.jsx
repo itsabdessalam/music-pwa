@@ -266,9 +266,12 @@ const TrackItemInner = ({ children, track, layout, ...props }) => {
 };
 
 const TrackItem = ({ data, children, className, layout, ...props }) => {
-  const { player, setPlayer, handleTrackFavorite, inFavorites } = useContext(
-    AppContext
-  );
+  const {
+    player,
+    updatePlayerStatus,
+    handleTrackFavorite,
+    isInFavorites,
+  } = useContext(AppContext);
   const [isPlaying, setIsPlaying] = useState(false);
 
   const { search } = data;
@@ -292,13 +295,7 @@ const TrackItem = ({ data, children, className, layout, ...props }) => {
       }
 
       playerElement.play();
-
-      // 0 : stopped, 1 : playing, 2 : paused
-      setPlayer({
-        selector: playerElement.id,
-        state: 1,
-      });
-
+      updatePlayerStatus(playerElement, 1);
       setIsPlaying(true);
     };
 
@@ -311,13 +308,7 @@ const TrackItem = ({ data, children, className, layout, ...props }) => {
 
       playerElement.pause();
       playerElement.currentTime = 0;
-
-      // 0 : stopped, 1 : playing, 2 : paused
-      setPlayer({
-        selector: playerElement.id,
-        state: 0,
-      });
-
+      updatePlayerStatus(playerElement, 0);
       setIsPlaying(false);
     };
 
@@ -360,7 +351,7 @@ const TrackItem = ({ data, children, className, layout, ...props }) => {
               handleTrackFavorite(track);
             }}
             className={`track__favorite ${
-              inFavorites(track) ? "track__favorite--added" : ""
+              isInFavorites(track) ? "track__favorite--added" : ""
             }`}
           >
             <Icon name={"heart"} width="24px"></Icon>

@@ -14,99 +14,90 @@ const Search = () => {
     AppContext
   );
   const debouncedSearchQuery = useDebounce(searchQuery, 500);
-
   const domRef = createRef();
 
-  // TODO: refactor
-  useEffect(() => {
-    async function fetchData() {
-      if (isOffline) {
-        return;
+  async function fetchData(offset, callback, errorCallback) {
+    try {
+      const result = await SpotifyService.searchTracks(
+        debouncedSearchQuery,
+        50,
+        offset
+      );
+      const {
+        data: {
+          tracks: { items },
+        },
+      } = result;
+
+      setTracks([
+        ...tracks,
+        ...items.map((item) => ({
+          ...item,
+          search: true,
+        })),
+      ]);
+      if (callback) {
+        callback();
       }
-
-      if (debouncedSearchQuery) {
-        setIsLoading(true);
-
-        try {
-          const result = await SpotifyService.searchTracks(
-            debouncedSearchQuery
-          );
-          const {
-            data: {
-              tracks: { items },
-            },
-          } = result;
-
-          setTracks(
-            items.map((item) => ({
-              ...item,
-              search: true,
-            }))
-          );
-        } catch (error) {}
-        setIsLoading(false);
-      } else {
-        setTracks([]);
+    } catch (error) {
+      if (errorCallback) {
+        errorCallback(error);
       }
     }
-    fetchData();
-  }, [debouncedSearchQuery, isOffline]);
+  }
 
   useEffect(() => {
     if (!debouncedSearchQuery || isOffline) {
+      setTracks([]);
       return;
     }
 
-    let didCancel = false;
+    let isMounted = true;
+
+    if (isMounted) {
+      setIsLoading(true);
+      fetchData(0, () => {
+        setIsLoading(false);
+      });
+    }
+
+    return () => {
+      isMounted = false;
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [debouncedSearchQuery]);
+
+  useEffect(() => {
+    if (!debouncedSearchQuery || isOffline) {
+      setTracks([]);
+      return;
+    }
+
+    let isMounted = true;
 
     const sentinel = domRef.current.querySelector("#sentinel");
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (
-          !didCancel &&
+          isMounted &&
           !isLoading &&
           !isFetchingMore &&
           entry.isIntersecting
         ) {
-          fetchData();
+          setIsFetchingMore(true);
+
+          fetchData(offset + 1, () => {
+            setOffset(offset + 1);
+            setIsFetchingMore(false);
+          });
         }
       });
     });
 
-    async function fetchData() {
-      const newOffset = offset + 1;
-
-      setIsFetchingMore(true);
-      setOffset(newOffset);
-
-      try {
-        const result = await SpotifyService.searchTracks(
-          debouncedSearchQuery,
-          50,
-          newOffset
-        );
-        const {
-          data: {
-            tracks: { items },
-          },
-        } = result;
-
-        setTracks([
-          ...tracks,
-          ...items.map((item) => ({
-            ...item,
-            search: true,
-          })),
-        ]);
-
-        setIsFetchingMore(false);
-      } catch (error) {}
-    }
-
     observer.observe(sentinel);
 
     return () => {
-      didCancel = true;
+      isMounted = false;
       if (observer && observer.disconnect) {
         observer.disconnect();
       }
@@ -136,6 +127,7 @@ const Search = () => {
       )}
       {isFetchingMore && (
         <div
+          className="track__list__loader"
           style={{
             position: "fixed",
             bottom: "50px",

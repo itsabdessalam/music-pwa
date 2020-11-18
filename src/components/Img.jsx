@@ -39,7 +39,7 @@ const Img = ({ src, alt, ...props }) => {
 
   useEffect(() => {
     let observer;
-    let didCancel = false;
+    let isMounted = true;
 
     if (imageRef && imageSrc !== src) {
       if (IntersectionObserver) {
@@ -47,7 +47,7 @@ const Img = ({ src, alt, ...props }) => {
           (entries) => {
             entries.forEach((entry) => {
               if (
-                !didCancel &&
+                isMounted &&
                 (entry.intersectionRatio > 0 || entry.isIntersecting)
               ) {
                 setImageSrc(src);
@@ -66,7 +66,7 @@ const Img = ({ src, alt, ...props }) => {
       }
     }
     return () => {
-      didCancel = true;
+      isMounted = false;
       if (observer && observer.unobserve) {
         observer.unobserve(imageRef);
       }

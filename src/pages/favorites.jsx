@@ -4,6 +4,7 @@ import { Title, TrackItem } from "../components";
 
 const Favorites = () => {
   const { favorites } = useContext(AppContext);
+
   return (
     <>
       <Title level={2}>Favorites</Title>

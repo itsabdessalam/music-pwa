@@ -11,6 +11,8 @@ const Tracks = () => {
   const { isOffline } = useContext(AppContext);
 
   useEffect(() => {
+    let isMounted = true;
+
     async function fetchData() {
       if (isOffline) {
         return;
@@ -31,7 +33,14 @@ const Tracks = () => {
         setIsLoading(false);
       }
     }
-    fetchData();
+
+    if (isMounted) {
+      fetchData();
+    }
+
+    return () => {
+      isMounted = false;
+    };
   }, [isOffline]);
 
   return (

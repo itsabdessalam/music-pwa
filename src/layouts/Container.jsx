@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const Wrapper = styled.main`
+const StyledContainer = styled.main`
   margin: 0 auto;
   padding: 15px;
   padding-bottom: 65px;
@@ -16,7 +16,7 @@ const Wrapper = styled.main`
 `;
 
 const Container = ({ children, ...props }) => (
-  <Wrapper {...props}>{children}</Wrapper>
+  <StyledContainer {...props}>{children}</StyledContainer>
 );
 
 export default Container;
