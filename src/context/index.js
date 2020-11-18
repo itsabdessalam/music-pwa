@@ -9,7 +9,7 @@ const AppContextProvider = ({ children }) => {
     state: 0,
   });
   const [favorites, setFavorites] = useLocalStorage(
-    "__music_app_user_favorites",
+    `${process.env.REACT_APP_BASE_NAME}_favorites`,
     []
   );
   const [isFetchingMore, setIsFetchingMore] = useState(false);

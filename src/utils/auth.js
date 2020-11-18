@@ -1,12 +1,12 @@
-const APP_GLOBAL_VAR = "__music_app_user";
+const AUTH_VAR = `${process.env.REACT_APP_BASE_NAME}_auth`;
 
 /**
  *
  *
  */
 const getUser = () =>
-  !!window.localStorage[APP_GLOBAL_VAR]
-    ? JSON.parse(window.localStorage[APP_GLOBAL_VAR])
+  !!window.localStorage[AUTH_VAR]
+    ? JSON.parse(window.localStorage[AUTH_VAR])
     : {};
 
 /**
@@ -16,7 +16,7 @@ const getUser = () =>
  * @returns
  */
 const setUser = (user) => {
-  return (window.localStorage[APP_GLOBAL_VAR] = JSON.stringify(user));
+  return (window.localStorage[AUTH_VAR] = JSON.stringify(user));
 };
 
 /**
