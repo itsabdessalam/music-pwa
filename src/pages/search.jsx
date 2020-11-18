@@ -30,7 +30,7 @@ const Search = () => {
       } = result;
 
       setTracks([
-        ...tracks,
+        ...(offset === 0 ? [] : tracks),
         ...items.map((item) => ({
           ...item,
           search: true,
