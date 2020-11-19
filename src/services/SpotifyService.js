@@ -22,9 +22,6 @@ const getToken = () => {
 };
 
 const SpotifyService = {
-  getToken() {
-    return axios.get();
-  },
   async getTracks() {
     const { data } = await getToken();
     const { access_token, token_type } = data;
