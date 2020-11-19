@@ -39,8 +39,6 @@ const Search = () => {
         setHasMoreResults(false);
       }
 
-      console.log("toot", data.tracks);
-
       if (callback) {
         callback();
       }
