@@ -3,7 +3,7 @@
  *
  * @param {*} promise
  * @param {*} errorExt
- * @return {*} 
+ * @return {*}
  */
 const until = (promise, errorExt) => {
   return promise

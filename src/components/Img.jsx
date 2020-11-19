@@ -57,7 +57,7 @@ const Img = ({ src, alt, ...props }) => {
           },
           {
             threshold: 0.01,
-            rootMargin: "75%",
+            rootMargin: "75%"
           }
         );
         observer.observe(imageRef);

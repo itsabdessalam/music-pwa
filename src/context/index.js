@@ -6,7 +6,7 @@ const AppContext = createContext({});
 const AppContextProvider = ({ children }) => {
   const [player, setPlayer] = useState({
     selector: "",
-    state: 0,
+    state: 0
   });
   const [favorites, setFavorites] = useLocalStorage(
     `${process.env.REACT_APP_BASE_NAME}_favorites`,
@@ -24,7 +24,7 @@ const AppContextProvider = ({ children }) => {
   const updatePlayerStatus = (player, state) => {
     setPlayer({
       selector: player.id,
-      state: state, // 0 : stopped, 1 : playing, 2 : paused
+      state: state // 0 : stopped, 1 : playing, 2 : paused
     });
   };
   /**
@@ -37,7 +37,7 @@ const AppContextProvider = ({ children }) => {
 
     if (trackExists) {
       setFavorites([
-        ...favorites.filter((favorite) => favorite.id !== track.id),
+        ...favorites.filter((favorite) => favorite.id !== track.id)
       ]);
     } else {
       setFavorites([...favorites, track]);
@@ -63,7 +63,7 @@ const AppContextProvider = ({ children }) => {
     isFetchingMore,
     setIsFetchingMore,
     isOffline,
-    setIsOffline,
+    setIsOffline
   };
 
   return <AppContext.Provider value={context}>{children}</AppContext.Provider>;

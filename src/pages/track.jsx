@@ -27,7 +27,7 @@ const Track = () => {
 
         setTrack({
           ...data,
-          search: true,
+          search: true
         });
       } catch (error) {
         setIsError(true);

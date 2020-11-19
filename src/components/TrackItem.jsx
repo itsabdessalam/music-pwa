@@ -324,7 +324,7 @@ const TrackItem = ({ data, children, className, layout, ...props }) => {
     player,
     updatePlayerStatus,
     handleTrackFavorite,
-    isInFavorites,
+    isInFavorites
   } = useContext(AppContext);
   const [isPlaying, setIsPlaying] = useState(false);
 

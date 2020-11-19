@@ -21,7 +21,7 @@ const LoginForm = () => {
 
     const user = {
       email: values.email,
-      password: values.password,
+      password: values.password
     };
 
     const [err, result] = await until(AuthService.login(user));
@@ -41,7 +41,7 @@ const LoginForm = () => {
     if (data && data.auth && data.token) {
       handleLogin({
         ...user,
-        token: data.token,
+        token: data.token
       });
       setIsLoading(false);
     }
@@ -49,7 +49,7 @@ const LoginForm = () => {
 
   const { values, handleChange, handleSubmit } = useForm(auth, {
     email: "",
-    password: "",
+    password: ""
   });
 
   if (isLoggedIn()) {

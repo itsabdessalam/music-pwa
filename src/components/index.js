@@ -22,5 +22,5 @@ export {
   ProtectedRoute,
   LoginForm,
   Title,
-  TrackItem,
+  TrackItem
 };

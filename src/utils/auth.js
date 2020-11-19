@@ -28,7 +28,7 @@ const setUser = (user) => {
 export const handleLogin = ({ email, password, token }) => {
   return setUser({
     email,
-    token,
+    token
   });
 };
 

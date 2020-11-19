@@ -11,13 +11,13 @@ const getToken = () => {
     method: "post",
     url: SPOTIFY_TOKEN_URL,
     data: qs.stringify({
-      grant_type: "client_credentials",
+      grant_type: "client_credentials"
     }),
     headers: {
       Authorization: `Basic ${btoa(
         SPOTIFY_CLIENT_ID + ":" + SPOTIFY_CLIENT_SECRET
-      )}`,
-    },
+      )}`
+    }
   });
 };
 
@@ -34,8 +34,8 @@ const SpotifyService = {
       url: `${SPOTIFY_API_URL}/playlists/37i9dQZEVXbIPWwFssbupI/tracks`, // Top 50 France playlist
       headers: {
         Accept: "application/json",
-        Authorization: `${token_type} ${access_token}`,
-      },
+        Authorization: `${token_type} ${access_token}`
+      }
     });
   },
   async getTrackById(id) {
@@ -47,8 +47,8 @@ const SpotifyService = {
       url: `${SPOTIFY_API_URL}/tracks/${id}`,
       headers: {
         Accept: "application/json",
-        Authorization: `${token_type} ${access_token}`,
-      },
+        Authorization: `${token_type} ${access_token}`
+      }
     });
   },
   async searchTracks(query, limit = 50, offset = 0) {
@@ -62,14 +62,14 @@ const SpotifyService = {
         q: query,
         type: "track",
         limit,
-        offset,
+        offset
       },
       headers: {
         Accept: "application/json",
-        Authorization: `${token_type} ${access_token}`,
-      },
+        Authorization: `${token_type} ${access_token}`
+      }
     });
-  },
+  }
 };
 
 export default SpotifyService;

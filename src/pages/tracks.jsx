@@ -23,7 +23,7 @@ const Tracks = () => {
       try {
         const result = await SpotifyService.getTracks();
         const {
-          data: { items },
+          data: { items }
         } = result;
 
         setTracks(items);

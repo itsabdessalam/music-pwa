@@ -10,6 +10,7 @@ const Search = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [tracks, setTracks] = useState([]);
   const [offset, setOffset] = useState(0);
+  const [hasMoreResults, setHasMoreResults] = useState(true);
   const { isFetchingMore, setIsFetchingMore, isOffline } = useContext(
     AppContext
   );
@@ -23,19 +24,23 @@ const Search = () => {
         50,
         offset
       );
-      const {
-        data: {
-          tracks: { items },
-        },
-      } = result;
+      const data = result.data;
+      const { items } = data.tracks;
 
       setTracks([
         ...(offset === 0 ? [] : tracks),
         ...items.map((item) => ({
           ...item,
-          search: true,
-        })),
+          search: true
+        }))
       ]);
+
+      if (tracks.length >= data.tracks.total) {
+        setHasMoreResults(false);
+      }
+
+      console.log("toot", data.tracks);
+
       if (callback) {
         callback();
       }
@@ -88,6 +93,7 @@ const Search = () => {
       entries.forEach((entry) => {
         if (
           isMounted &&
+          hasMoreResults &&
           !isLoading &&
           !isFetchingMore &&
           entry.isIntersecting
@@ -147,7 +153,7 @@ const Search = () => {
             left: 0,
             backgroundImage:
               "linear-gradient(0deg, rgb(247, 250, 252) 0%, rgba(247, 250, 252, 0.8) 50%, rgba(247, 250, 252, 0) 100%)",
-            zIndex: 1070,
+            zIndex: 1070
           }}
         >
           <Loader />
