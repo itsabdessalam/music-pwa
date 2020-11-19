@@ -1,8 +1,8 @@
 /**
+ * Truncates a string up to a given length.
  *
- *
- * @param {*} value
- * @param {*} length
+ * @param {string} value
+ * @param {number} length
  */
 export const truncate = (value, length) =>
   value.length > length

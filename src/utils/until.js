@@ -1,5 +1,5 @@
 /**
- *
+ * Converts an asynchronous function to return only data and error
  *
  * @param {*} promise
  * @param {*} errorExt

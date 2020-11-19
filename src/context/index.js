@@ -15,23 +15,13 @@ const AppContextProvider = ({ children }) => {
   const [isFetchingMore, setIsFetchingMore] = useState(false);
   const [isOffline, setIsOffline] = useState(false);
 
-  /**
-   *
-   *
-   * @param {*} player
-   * @param {*} state
-   */
   const updatePlayerStatus = (player, state) => {
     setPlayer({
       selector: player.id,
       state: state // 0 : stopped, 1 : playing, 2 : paused
     });
   };
-  /**
-   *
-   *
-   * @param {*} track
-   */
+
   const handleTrackFavorite = (track) => {
     let trackExists = favorites.find((favorite) => favorite.id === track.id);
 
@@ -43,13 +33,7 @@ const AppContextProvider = ({ children }) => {
       setFavorites([...favorites, track]);
     }
   };
-
-  /**
-   *
-   *
-   * @param {*} track
-   * @return {*}
-   */
+  
   const isInFavorites = (track) => {
     return track && favorites.find((favorite) => favorite.id === track.id);
   };
